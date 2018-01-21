@@ -15,8 +15,8 @@ class Signin extends Component {
         errorMessage: PropTypes.string
     };
 
-    handleFormSubmit({ email, password }) {
-        this.props.signinUser({ email, password});
+    handleFormSubmit({ username, password }) {
+        this.props.signinUser({ username, password});
     }
 
     renderAlert() {
@@ -52,14 +52,14 @@ class Signin extends Component {
                     <hr/>
 
                     <fieldset className="form-group">
-                        <Field name="email" label="Email" component={this.renderField}
+                        <Field name="username" label="Username" component={this.renderField}
                                type="text" validate={[required]}/>
                     </fieldset>
 
 
                     <fieldset className="form-group">
                         <Field name="password" label="Password" component={this.renderField}
-                               type="text" validate={[required]}/>
+                               type="password" validate={[required]}/>
                     </fieldset>
 
                     <fieldset className="form-group">

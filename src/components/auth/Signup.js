@@ -15,8 +15,8 @@ class Signup extends Component {
 
     handleFormSubmit(values) {
         // Call action creator to sign up the user.
-        const { email, password, confirm_password,first_name, last_name, phone, dob, address, is_agent } = values;
-        this.props.signupUser(email, password,confirm_password,first_name, last_name, phone, dob, address, is_agent);
+        const { email, password, confirm_password,first_name, last_name, phone, dob, address,id_proof, is_agent } = values;
+        this.props.signupUser(email, password, confirm_password, first_name,last_name, phone, dob, address, id_proof, is_agent);
     }
 
     renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -115,6 +115,7 @@ class Signup extends Component {
 // Sync field level validation for password match
 const validateForm = values => {
     const errors = {};
+
     const { password, passwordConfirm } = values;
     if (password !== passwordConfirm) {
         errors.passwordConfirm = "Password does not match."

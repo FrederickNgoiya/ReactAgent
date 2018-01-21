@@ -18,14 +18,15 @@ function authError(error) {
         payload: error
     }
 }
+ 
 
-export function signupUser(email, password, confirm_password,first_name, last_name, phone, dob, address, is_agent) {
+export function signupUser(email, password, confirm_password, first_name, last_name, phone, dob, address, id_proof, is_agent) {
     return function(dispatch) {
         const signupUrl = `${ROOT_URL}/auth/register/`;
 
         fetch(signupUrl,{
             method: 'post',
-            mode: 'no-cors',
+             mode: 'no-cors',
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": Cookies.get('csrftoken'),
@@ -33,12 +34,19 @@ export function signupUser(email, password, confirm_password,first_name, last_na
               },
             email,
             password,
-            confirm_password,first_name, last_name, phone, dob, address, is_agent
+            confirm_password,
+            first_name,
+             last_name,
+              phone, 
+              dob, 
+              address, 
+              id_proof,
+              is_agent
         })   
         .then((response) => {
             // If request is good...
             // Update state to indicate user is authenticated
-            console.log(response)
+            console.log(response);
             dispatch(authUser());
 
             // Save the JWT token
@@ -56,7 +64,7 @@ export function signupUser(email, password, confirm_password,first_name, last_na
     }
 }
 
-export function signinUser({ email, password }) {
+export function signinUser({ username, password }) {
     return function(dispatch) {
         // Submit email/password to the server
         const signinUrl = `${ROOT_URL}/auth/login/`;
@@ -68,7 +76,7 @@ export function signinUser({ email, password }) {
                 "X-CSRFToken": Cookies.get('csrftoken'),
                 'X-Requested-With': 'XMLHttpRequest'
               },
-            email,
+            username,
             password
         }) 
         .then((response) => {
@@ -85,6 +93,7 @@ export function signinUser({ email, password }) {
             .catch(() => {
                 // If request is bad...
                 // Show an error to the user
+                
                 dispatch(authError("Bad Login Info"));
             });
     }
