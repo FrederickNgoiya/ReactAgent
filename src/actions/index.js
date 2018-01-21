@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch';
 import { polyfill } from 'es6-promise';
 import * as Cookies from 'js-cookie';
 
-const ROOT_URL = "http://zolla3.yghqkmj5k2.eu-west-2.elasticbeanstalk.com";
+const ROOT_URL = "http://127.0.0.1:8000";
 
 
 function authUser() {
@@ -19,20 +19,21 @@ function authError(error) {
     }
 }
 
-export function signupUser(email, password) {
+export function signupUser(email, password, confirm_password,first_name, last_name, phone, dob, address, is_agent) {
     return function(dispatch) {
         const signupUrl = `${ROOT_URL}/auth/register/`;
 
         fetch(signupUrl,{
-            method:'post',
-            credentials: 'same-origin',
+            method: 'post',
+            mode: 'no-cors',
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": Cookies.get('csrftoken'),
                 'X-Requested-With': 'XMLHttpRequest'
               },
             email,
-            password
+            password,
+            confirm_password,first_name, last_name, phone, dob, address, is_agent
         })   
         .then((response) => {
             // If request is good...

@@ -15,8 +15,8 @@ class Signup extends Component {
 
     handleFormSubmit(values) {
         // Call action creator to sign up the user.
-        const { email, password } = values;
-        this.props.signupUser(email, password);
+        const { email, password, confirm_password,first_name, last_name, phone, dob, address, is_agent } = values;
+        this.props.signupUser(email, password,confirm_password,first_name, last_name, phone, dob, address, is_agent);
     }
 
     renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -53,15 +53,53 @@ class Signup extends Component {
                                type="text" validate={[required]}/>
                     </fieldset>
 
-
+                    <fieldset className="form-group">
+                        <Field name="username" label="Username" component={this.renderField}
+                               type="text" validate={[required]}/>
+                    </fieldset>
                     <fieldset className="form-group">
                         <Field name="password" label="Password" component={this.renderField}
                                type="password" validate={[required]}/>
                     </fieldset>
 
                     <fieldset className="form-group">
-                        <Field name="passwordConfirm" label="Confirm Password" component={this.renderField}
+                        <Field name="confirm_password" label="Confirm Password" component={this.renderField}
                                type="password" validate={[required]}/>
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <Field name="first_name" label="First Name" component={this.renderField}
+                               type="text" validate={[required]}/>
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <Field name="last_name" label="Last Name" component={this.renderField}
+                               type="text" validate={[required]}/>
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <Field name="phone" label="Phone Number" component={this.renderField}
+                               type="text" validate={[required]}/>
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <Field name="address" label="Address" component={this.renderField}
+                               type="text" validate={[required]}/>
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <Field name="id_proof" label="Upload your id" component={this.renderField}
+                               type="text" validate={[required]}/>
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <Field name="dob" label="dob" component={this.renderField}
+                               type="text" validate={[required]}/>
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <Field name="is_agent" label="Are you an agent?" component={this.renderField}
+                               type="text" validate={[required]}/>
                     </fieldset>
 
                     <fieldset className="form-group">
