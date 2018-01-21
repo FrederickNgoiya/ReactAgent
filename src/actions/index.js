@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch';
 import { polyfill } from 'es6-promise';
 import * as Cookies from 'js-cookie';
 
-const ROOT_URL = "http://127.0.0.1:8000";
+const ROOT_URL = "http://zolla3.yghqkmj5k2.eu-west-2.elasticbeanstalk.com";
 
 
 function authUser() {
