@@ -10,7 +10,7 @@ class Feature extends Component {
     };
 
     componentWillMount() {
-        this.props.fetchMessage();
+       this.props.fetchMessage();
     }
 
     render() {

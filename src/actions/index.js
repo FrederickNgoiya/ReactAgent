@@ -66,36 +66,69 @@ export function signupUser(email, password, confirm_password, first_name, last_n
 
 export function signinUser({ username, password }) {
     return function(dispatch) {
-        // Submit email/password to the server
+        console.log(username, password)
         const signinUrl = `${ROOT_URL}/auth/login/`;
-        fetch(signinUrl, {
-            method: 'get',
-            mode: 'no-cors',
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": Cookies.get('csrftoken'),
-                'X-Requested-With': 'XMLHttpRequest'
-              },
+        console.log(signinUrl)
+        axios.post(signinUrl,{
             username,
             password
-        }) 
-        .then((response) => {
-                // If request is good...
-                // Update state to indicate user is authenticated
-                dispatch(authUser());
+        }
 
-                // Save the JWT token
-                localStorage.setItem("token", response.data.token);
+        ).then(response =>{
 
-                // redirect to the route '/feature'
-                history.push("/feature");
-            })
-            .catch(() => {
-                // If request is bad...
-                // Show an error to the user
-                
-                dispatch(authError("Bad Login Info"));
-            });
+
+            console.log(response)
+              //  If request is good...
+                //Update state to indicate user is authenticated
+               //dispatch(authUser());
+
+              //  Save the JWT token
+               localStorage.setItem("token", response.data.token);
+
+             //   redirect to the route '/feature'
+
+                //history.push("/feature");
+
+            
+        }).catch(error =>{
+            console.log(error)
+            dispatch(authError("Bad Login Info"));
+        })
+        
+        
+       // Submit email/password to the server
+    //    const signinUrl = `${ROOT_URL}/auth/login/`;
+    //    fetch(signinUrl, {
+    //        method: 'post',
+    //        //mode: 'no-cors',
+    //         // headers: {
+    //         //    "Content-Type": "application/json",
+    //         //     "X-CSRFToken": Cookies.get('csrftoken'),
+    //         //     'X-Requested-With': 'XMLHttpRequest'
+    //         //  },
+    //        //body: {
+    //         username:username,
+    //         password: password
+    //        // }
+    //    }) 
+    //     .then((response) => {
+    //               console.log(response)
+    //           //  If request is good...
+    //             //Update state to indicate user is authenticated
+    //            dispatch(authUser());
+
+    //           //  Save the JWT token
+    //            //localStorage.setItem("token", response.data.token);
+
+    //          //   redirect to the route '/feature'
+    //             history.push("/feature");
+    //        })
+    //         .catch((error) => {
+    //           //  If request is bad...
+    //             //Show an error to the user
+    //             console.log(error)
+    //            dispatch(authError("Bad Login Info"));
+    //         });
     }
 }
 
@@ -108,7 +141,8 @@ export function signoutUser() {
 
 export function fetchMessage() {
     return function(dispatch) {
-        axios.get(ROOT_URL, {
+        const balance = `${ROOT_URL}/user/balance/`;
+        axios.get(balance, {
             headers: {
                 authorization: localStorage.getItem("token")
             }

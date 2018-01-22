@@ -15,7 +15,8 @@ class Signin extends Component {
         errorMessage: PropTypes.string
     };
 
-    handleFormSubmit({ username, password }) {
+    handleFormSubmit(e, username, password) {
+        console.log(e, " this is e")
         this.props.signinUser({ username, password});
     }
 
@@ -40,12 +41,14 @@ class Signin extends Component {
     );
 
     render() {
+        console.log("signin rendered")
         const {handleSubmit} = this.props;
         return (
             <div className="row justify-content-center">
 
                 <form
                     className="col col-sm-4 card mt-5 p-2"
+                    
                     onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
                 >
                     <h4 className="text-md-center">Please Sign In</h4>
