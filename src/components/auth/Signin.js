@@ -8,6 +8,10 @@ import * as actions from "../../actions";
 import { required } from "./validation";
 
 class Signin extends Component {
+    constructor(props){
+        super(props);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    }
 
     static propTypes = {
         ...propTypes,
@@ -15,8 +19,9 @@ class Signin extends Component {
         errorMessage: PropTypes.string
     };
 
-    handleFormSubmit(e, username, password) {
-        console.log(e, " this is e")
+    handleFormSubmit({username,password}) {
+        //e.preventDefault();
+        console.log(" this is e",username,password)
         this.props.signinUser({ username, password});
     }
 
@@ -28,6 +33,7 @@ class Signin extends Component {
                 </div>
             )
         }
+        //handleSubmit(this.handleFormSubmit)
     }
 
     renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -49,7 +55,7 @@ class Signin extends Component {
                 <form
                     className="col col-sm-4 card mt-5 p-2"
                     
-                    onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+                    onSubmit={handleSubmit(this.handleFormSubmit)}
                 >
                     <h4 className="text-md-center">Please Sign In</h4>
                     <hr/>

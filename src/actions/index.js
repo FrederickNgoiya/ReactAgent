@@ -78,16 +78,25 @@ export function signinUser({ username, password }) {
 
 
             console.log(response)
-              //  If request is good...
+            if(response.data.error)
+            {
+                console.log("NO USER");
+                dispatch(authError("Bad Login Info"));
+            }
+            else
+            {
+                console.log("FOUND A USER");
+                 //  If request is good...
                 //Update state to indicate user is authenticated
-               //dispatch(authUser());
+               dispatch(authUser());
 
               //  Save the JWT token
                localStorage.setItem("token", response.data.token);
-
-             //   redirect to the route '/feature'
-
-                //history.push("/feature");
+  
+                history.push("/feature");
+            }
+             
+                
 
             
         }).catch(error =>{
